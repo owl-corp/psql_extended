@@ -6,7 +6,16 @@ This image is derived from official [postgres:14-alpine](https://hub.docker.com/
 
 A pre-build image of this Dockerfile is available from GHCR [here](https://github.com/ChrisLovering/psql_pg_cron/pkgs/container/psql_pg_cron).
 
-Once deployed, you can add the pg_cron extension to the database of choice by connecting to the DB and running 
+Once deployed, you nned to add the following to the bottom of your postgresql.conf file, replacing `my_database` with the name of the database you want pg_cron to be used in, making sure to reboot postgres after doing so.
+
+This can't be done within this base image itself, as that would stop it from working within docker-compose.
+
+```
+shared_preload_libraries = 'pg_cron'
+cron.database_name = 'my_database'
+```
+
+You can then enable the pg_cron extension on that database by running the following within that database. 
 
 ```sql
 CREATE EXTENSION pg_cron
