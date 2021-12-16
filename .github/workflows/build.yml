@@ -49,11 +49,11 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          cache-from: type=registry,ref=ghcr.io/chrislovering/psql_pg_cron:latest
+          cache-from: type=registry,ref=ghcr.io/chrislovering/psql_extended:latest
           cache-to: type=inline
           tags: |
-            ghcr.io/chrislovering/psql_pg_cron:latest
-            ghcr.io/chrislovering/psql_pg_cron:14
-            ghcr.io/chrislovering/psql_pg_cron:${{ steps.sha_tag.outputs.tag }}
+            ghcr.io/chrislovering/psql_extended:latest
+            ghcr.io/chrislovering/psql_extended:14
+            ghcr.io/chrislovering/psql_extended:${{ steps.sha_tag.outputs.tag }}
           build-args: |
             git_sha=${{ github.sha }}
