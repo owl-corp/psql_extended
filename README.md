@@ -1,12 +1,25 @@
-# PostgreSQL + pg_cron
+# PostgreSQL Extended
 
-Dockerfile for building Postgres with the [pg_cron](https://github.com/citusdata/pg_cron) extension from citrusdata.
+## Summary
+
+This repo contains the Dockerfile and supplementary files for building a Postgres image including some useful extensions
+
+### Extensions installed:
+
+- [pg_cron](https://github.com/citusdata/pg_cron)
+- [pg_repack](https://github.com/reorg/pg_repack)
+
+## Details
 
 This image is derived from official [postgres:14-alpine](https://hub.docker.com/_/postgres) docker image. [docker-entrypint.sh](docker-entrypoint.sh) is directly from [docker-library](https://github.com/docker-library/postgres/blob/master/14/alpine/docker-entrypoint.sh).
 
-A pre-build image of this Dockerfile is available from GHCR [here](https://github.com/ChrisLovering/psql_pg_cron/pkgs/container/psql_pg_cron).
+A pre-built image is available from GHCR [here](https://github.com/ChrisLovering/psql_pg_cron/pkgs/container/psql_pg_cron).
 
-Once deployed, you nned to add the following to the bottom of your postgresql.conf file, replacing `my_database` with the name of the database you want pg_cron to be used in, making sure to reboot postgres after doing so.
+
+## Post deployment steps
+
+### pg_cron
+Add the following to the bottom of your postgresql.conf file, replacing `my_database` with the name of the database to make pg_cron available in, making sure to reboot postgres after doing so.
 
 This can't be done within this base image itself, as that would stop it from working within docker-compose.
 
@@ -18,5 +31,12 @@ cron.database_name = 'my_database'
 You can then enable the pg_cron extension on that database by running the following within that database. 
 
 ```sql
-CREATE EXTENSION pg_cron
+CREATE EXTENSION pg_cron;
+```
+
+### pg_repack
+Run the following on the database you want pg_repack to be available in.
+
+```sql
+CREATE EXTENSION pg_repack;
 ```
