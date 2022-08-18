@@ -1,6 +1,7 @@
 name: Build
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -11,16 +12,12 @@ concurrency:
 
 jobs:
   build:
+    strategy:
+      matrix:
+        postgres_version: [12, 13, 14]
     runs-on: ubuntu-latest
 
     steps:
-      # Create a commit SHA-based tag for the container repositories
-      - name: Create SHA Container Tag
-        id: sha_tag
-        run: |
-          tag=$(cut -c 1-7 <<< $GITHUB_SHA)
-          echo "::set-output name=tag::$tag"
-
       - name: Checkout code
         uses: actions/checkout@v2
 
@@ -49,11 +46,9 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          cache-from: type=registry,ref=ghcr.io/chrislovering/psql_extended:latest
+          cache-from: type=registry,ref=ghcr.io/chrislovering/psql_extended:${{ matrix.postgres_version }}
           cache-to: type=inline
           tags: |
-            ghcr.io/chrislovering/psql_extended:latest
-            ghcr.io/chrislovering/psql_extended:14
-            ghcr.io/chrislovering/psql_extended:${{ steps.sha_tag.outputs.tag }}
+            ghcr.io/chrislovering/psql_extended:${{ matrix.postgres_version }}
           build-args: |
-            git_sha=${{ github.sha }}
+            postgres_version=${{ matrix.postgres_version }}

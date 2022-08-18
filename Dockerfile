@@ -1,4 +1,6 @@
-FROM postgres:14-alpine
+ARG postgres_version=14
+
+FROM postgres:$postgres_version-alpine
 
 ENV PG_CRON_VERSION=1.4.1 \
     PG_REPACK_VERSION=1.4.7
