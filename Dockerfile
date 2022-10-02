@@ -2,7 +2,7 @@ ARG postgres_version=14
 
 FROM postgres:$postgres_version-alpine
 
-ENV PG_CRON_VERSION=1.4.1 \
+ENV PG_CRON_VERSION=1.4.2 \
     PG_REPACK_VERSION=1.4.7
 
 # Install build deps
