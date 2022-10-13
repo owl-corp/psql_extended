@@ -1,9 +1,9 @@
-ARG postgres_version=14
+ARG postgres_version=15
 
 FROM postgres:$postgres_version-alpine
 
 ENV PG_CRON_VERSION=1.4.2 \
-    PG_REPACK_VERSION=1.4.7
+    PG_REPACK_VERSION=1.4.8
 
 # Install build deps
 RUN apk add --no-cache --virtual .build-deps cmake build-base wget postgresql-dev lz4-dev zlib-dev gawk
