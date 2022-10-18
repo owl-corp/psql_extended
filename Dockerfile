@@ -6,7 +6,7 @@ ENV PG_CRON_VERSION=1.4.2 \
     PG_REPACK_VERSION=1.4.8
 
 # Install build deps
-RUN apk add --no-cache --virtual .build-deps cmake build-base wget postgresql-dev lz4-dev zlib-dev gawk
+RUN apk add --no-cache --virtual .build-deps cmake build-base wget postgresql-dev lz4-dev zlib-dev gawk zstd-dev
 
 #Download, build & install pg_cron
 RUN mkdir /cron_build && \
@@ -20,9 +20,9 @@ RUN mkdir /cron_build && \
 #Download, build & install pg_repack
 RUN mkdir /repack_build && \
     cd /repack_build && \
-    wget https://api.pgxn.org/dist/pg_repack/$PG_REPACK_VERSION/pg_repack-$PG_REPACK_VERSION.zip && \
+    wget -O pg_repack-$PG_REPACK_VERSION.zip https://github.com/reorg/pg_repack/archive/refs/heads/master.zip  && \
     unzip pg_repack-$PG_REPACK_VERSION.zip && \
-    cd pg_repack-$PG_REPACK_VERSION && \
+    cd pg_repack-master && \
     make && \
     make install
 
