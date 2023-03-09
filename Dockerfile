@@ -1,5 +1,4 @@
 ARG postgres_version=15
-
 FROM postgres:$postgres_version-alpine
 
 ENV PG_CRON_VERSION=1.4.2 \
