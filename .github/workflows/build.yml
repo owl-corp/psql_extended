@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - .github/workflows/**
+      - docker-entrypoint.sh
+      - dockerfile
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
