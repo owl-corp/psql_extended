@@ -11,7 +11,9 @@ This repo contains the Dockerfile and supplementary files for building a Postgre
 
 ## Details
 
-This image is derived from official [postgres:14-alpine](https://hub.docker.com/_/postgres) docker image. [docker-entrypint.sh](docker-entrypoint.sh) is directly from [docker-library](https://github.com/docker-library/postgres/blob/master/14/alpine/docker-entrypoint.sh).
+This image was originally derived from official [postgres:14-alpine](https://hub.docker.com/_/postgres) docker image with some modifications since.
+
+[docker-entrypoint.sh](docker-entrypoint.sh) is directly from [docker-library](https://github.com/docker-library/postgres/blob/master/14/alpine/docker-entrypoint.sh).
 
 A pre-built image is available from GHCR [here](https://github.com/ChrisLovering/psql_pg_cron/pkgs/container/psql_pg_cron).
 
