@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This repo is no longer maintained & has been archived. Maintainers have move to bare-metal postgres, instead of containerised, so had no need for these features.
+
 # PostgreSQL Extended
 
 ## Summary
